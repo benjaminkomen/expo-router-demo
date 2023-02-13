@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Router Demo",
-    "slug": "expo-router",
+    "slug": "react-navigation",
     "scheme": "bacontext",
     "splash": {
       "image": "./splash.png",

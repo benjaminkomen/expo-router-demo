@@ -1,7 +1,7 @@
 {
   "name": "expo-router-demo",
   "version": "1.0.0",
-  "main": "index",
+  "main": "app/App.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -12,10 +12,11 @@
     "@babel/plugin-proposal-export-namespace-from": "7.18.9",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/drawer": "6.5.8",
+    "@react-navigation/native": "6.1.2",
+    "@react-navigation/stack": "6.3.11",
     "expo": "47.0.13",
     "expo-auth-session": "3.8.0",
     "expo-random": "13.0.0",
-    "expo-router": "1.0.0-rc6",
     "expo-secure-store": "12.0.0",
     "expo-status-bar": "^1.4.2",
     "react": "18.1.0",
