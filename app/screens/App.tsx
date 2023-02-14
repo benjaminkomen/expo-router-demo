@@ -98,16 +98,17 @@ function NotesList() {
                   flexBasis: Math.min(300, innerWindow),
                 }}
                 key={item.id}
-                onPress={() => {
-                  navigation.navigate('Note', {
-                        note: item.id
-                      }
-                  )
-                }
-                }
-
             >
-              <Pressable>
+              <Pressable
+                  onPress={() => {
+                    console.log("navigation to note pressed");
+                    navigation.navigate('Note', {
+                          note: item.id
+                        }
+                    )
+                  }
+                  }
+              >
                 {({hovered, pressed}) => (
                     <View
                         style={{

@@ -11,24 +11,8 @@ export default function Note() {
 
   const selected = data.notes?.find((item) => item.id === note);
 
-  if (!selected) {
-    return (
-        <>
-          <Stack.Screen options={{ title: "Not Found!" }} />
-          <View style={styles.container}>
-            <View style={styles.main}>
-              <Text style={{ fontSize: 24 }}>
-                Cannot find note for ID: {note}
-              </Text>
-            </View>
-          </View>
-        </>
-    );
-  }
-
   return (
       <>
-        <Stack.Screen options={{ title: selected.id }} />
         <View style={styles.container}>
           <View style={styles.main}>
             <Item title="Note">{selected.text}</Item>

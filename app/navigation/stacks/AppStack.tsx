@@ -7,6 +7,8 @@ import {Platform, Pressable, Text} from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {StatusBar} from "expo-status-bar";
 import {useNavigation} from "@react-navigation/native";
+import Note from "../../screens/Note";
+import {useNotes} from "../../../context/notes";
 
 const AppStackNav = createStackNavigator();
 
@@ -47,6 +49,13 @@ export function AppStack(): JSX.Element {
                   ios: DismissComposeButton.bind(navigation),
                 }),
               }}/>
+          <AppStackNav.Screen
+              component={Note}
+              name={"Note"}
+              options={({route}) => ({
+                title: determineTitle(route),
+              })}
+          />
         </AppStackNav.Navigator>
       </>
   );
@@ -95,4 +104,14 @@ function DismissComposeButton(navigation) {
         </Text>
       </Pressable>
   );
+}
+
+function determineTitle(route) {
+  const {note} = route.params;
+
+  console.log("determineTitle", note);
+
+  const data = useNotes();
+  const selected = data.notes?.find((item) => item.id === note);
+  return selected.id;
 }
