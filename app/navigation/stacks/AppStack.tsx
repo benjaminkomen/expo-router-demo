@@ -21,16 +21,15 @@ export function AppStack(): JSX.Element {
         <StatusBar style="auto"/>
         <AppStackNav.Navigator
             initialRouteName={'App'}
-            screenOptions={{
-              headerRight: SignOutButton,
-            }}>
+        >
           <AppStackNav.Screen
               component={App}
               name={"index"}
               options={{
                 title: "Notes",
+                headerRight: SignOutButton,
                 headerLargeTitle: true,
-                headerTransparent: false,
+                // This does not work for some reason, it should render a search bar
                 headerSearchBarOptions: {
                   onChangeText: (event) => {
                     // Update the query params to match the search query.
