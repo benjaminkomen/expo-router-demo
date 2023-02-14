@@ -10,6 +10,7 @@ export const MainStack = (): JSX.Element => {
 
   const ctx = useContext(AuthContext);
   let isLoggedIn = ctx.isLoggedIn;
+  console.log(isLoggedIn);
 
   return (
       <MainStackNav.Navigator
@@ -17,7 +18,7 @@ export const MainStack = (): JSX.Element => {
             headerShown: false,
           })}
       >
-        {isLoggedIn ? <MainStackNav.Screen
+        {!isLoggedIn ? <MainStackNav.Screen
             name={"AUTH_STACK"}
             component={AuthStack}
         /> : <MainStackNav.Screen

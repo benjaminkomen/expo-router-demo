@@ -30,6 +30,7 @@ export function AppStack(): JSX.Element {
               options={{
                 title: "Notes",
                 headerLargeTitle: true,
+                headerTransparent: false,
                 headerSearchBarOptions: {
                   onChangeText: (event) => {
                     // Update the query params to match the search query.
@@ -72,7 +73,9 @@ function SignOutButton() {
             alignItems: "center",
             paddingRight: 8,
           }}
-          onPress={() => signOut()}
+          onPress={() => {
+            console.log("sign out pressed")
+          signOut()}}
       >
         <Text
             style={{
