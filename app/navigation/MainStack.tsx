@@ -1,30 +1,29 @@
-import React from "react";
-import {createStackNavigator, StackScreenProps} from "@react-navigation/stack";
+import React, {useContext} from "react";
+import {createStackNavigator} from "@react-navigation/stack";
 import {AuthStack} from "./stacks/AuthStack";
-import {StackScreensParamsList} from "./types";
+import AuthContext from "../../context/auth";
+import {AppStack} from "./stacks/AppStack";
 
-// --- Main stack screens --- //
-export type MainStackParamListKeys = "AUTH_STACK" | "APP";
-export type MainStackParamList = Pick<StackScreensParamsList, MainStackParamListKeys>;
-// Main stack navigation props
-export type MainStackScreenProps<T extends MainStackParamListKeys> = StackScreenProps<MainStackParamList, T>;
-
-const MainStackNav = createStackNavigator<MainStackParamList>();
+const MainStackNav = createStackNavigator();
 
 export const MainStack = (): JSX.Element => {
 
+  const ctx = useContext(AuthContext);
+  let isLoggedIn = ctx.isLoggedIn;
+
   return (
-      <>
-        <MainStackNav.Navigator
-            screenOptions={() => ({
-              headerShown: false,
-            })}
-        >
-          <MainStackNav.Screen
-              name={"AUTH_STACK"}
-              component={AuthStack}
-          />
-        </MainStackNav.Navigator>
-      </>
+      <MainStackNav.Navigator
+          screenOptions={() => ({
+            headerShown: false,
+          })}
+      >
+        {isLoggedIn ? <MainStackNav.Screen
+            name={"AUTH_STACK"}
+            component={AuthStack}
+        /> : <MainStackNav.Screen
+            name={"APP_STACK"}
+            component={AppStack}
+        />}
+      </MainStackNav.Navigator>
   );
 };

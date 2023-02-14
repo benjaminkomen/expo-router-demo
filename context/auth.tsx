@@ -1,39 +1,26 @@
-import React from "react";
-import {useAsyncStorage} from "@react-native-async-storage/async-storage";
+import React, {createContext, useContext, useState} from "react";
 
-const AuthContext = React.createContext(null);
+const AuthContext = createContext({
+  isLoggedIn: false,
+  signIn: () => {},
+  signOut: () => {},
+});
+
+export default AuthContext;
 
 export function useAuth() {
-  return React.useContext(AuthContext);
+  return useContext(AuthContext);
 }
 
-export function Provider(props) {
-  const {getItem, setItem, removeItem} = useAsyncStorage("USER");
-  const [user, setAuth] = React.useState(undefined);
-
-  React.useEffect(() => {
-    getItem().then((json) => {
-      console.log("json", json);
-      if (json != null) {
-        setAuth(JSON.parse(json));
-      } else {
-        setAuth(null);
-      }
-    });
-  }, []);
+export function AuthContextProvider(props) {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
       <AuthContext.Provider
           value={{
-            signIn: () => {
-              setAuth({});
-              setItem(JSON.stringify({}));
-            },
-            signOut: () => {
-              setAuth(null);
-              removeItem();
-            },
-            user,
+            isLoggedIn: isLoggedIn,
+            signIn: () => setIsLoggedIn(true),
+            signOut: () => setIsLoggedIn(false)
           }}
       >
         {props.children}
